@@ -1,0 +1,35 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
+public class ShortDateConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a short date (YYYY-MM-DD): ");
+        String shortDate = scanner.nextLine();
+
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = inputFormat.parse(shortDate);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            String monthName = getMonthName(month);
+
+            System.out.println("Full date representation: " + monthName + " " + day + ", " + year);
+        } catch (Exception e) {
+            System.out.println("Invalid date format. Please enter a valid short date (YYYY-MM-DD).");
+        }
+    }
+
+    private static String getMonthName(int month) {
+        String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return monthNames[month];
+    }
+}
